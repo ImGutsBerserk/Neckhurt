@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ВНИМАНИЕ! ПРОВЕРКА!</title>
     <style>
-        /* CSS прямо здесь */
         body {
             background: #000;
             color: #0f0;
@@ -24,13 +23,12 @@
             border: 5px double #f00;
             padding: 30px;
             background: rgba(20, 20, 20, 0.9);
-            box-shadow: 0 0 20px #f00;
+            opacity: 0.5;
         }
 
         h1 {
             font-size: 3rem;
             color: #ff0;
-            text-shadow: 3px 3px #f00;
             margin-bottom: 50px;
         }
 
@@ -98,26 +96,21 @@
     <audio id="screamSound" src="SixSeven.m4a"></audio>
 
     <script>
-        // JS прямо здесь
         function answer(isOld) {
             const audio = document.getElementById('screamSound');
             const scareScreen = document.getElementById('scare-screen');
             const mainUI = document.getElementById('main-ui');
 
             if (isOld) {
-                // Если дед — пропускаем
                 alert("Добро пожаловать, почтенный олд!");
                 window.location.href = "https://t.me/your_bot_link"; // Ссылка на твоего бота
             } else {
-                // Если нет — SIX SEVEN!
                 mainUI.style.display = 'none';
                 scareScreen.style.display = 'flex';
                 
-                // Включаем звук
                 audio.volume = 1.0; 
                 audio.play().catch(e => console.log("Ошибка звука: браузер требует клика"));
 
-                // Мигание экрана для эпичности
                 let colors = ['#000', '#f00', '#fff'];
                 let i = 0;
                 setInterval(() => {
@@ -125,10 +118,9 @@
                     i++;
                 }, 50);
 
-                // Через 2.5 секунды выкидываем в Google
                 setTimeout(() => {
                     window.location.href = "https://www.google.com/search?q=как+дожить+до+67+лет";
-                }, 2500);
+                }, 18000);
             }
         }
     </script>

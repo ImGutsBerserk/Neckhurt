@@ -18,24 +18,22 @@
             overflow: hidden;
             text-align: center;
         }
-
         .container {
             border: 5px double #f00;
             padding: 30px;
             background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0 0 20px #f00;
         }
-
         h1 {
             font-size: 3rem;
             color: #ff0;
+            text-shadow: 3px 3px #f00;
             margin-bottom: 50px;
         }
-
         .buttons {
             display: flex;
             gap: 20px;
         }
-
         button {
             padding: 20px 40px;
             font-size: 1.5rem;
@@ -44,23 +42,10 @@
             border: 4px outset #ccc;
             transition: transform 0.1s;
         }
+        .btn-yes { background: #008000; color: white; }
+        .btn-no { background: #800000; color: white; }
+        button:active { border-style: inset; transform: scale(0.95); }
 
-        .btn-yes {
-            background: #008000;
-            color: white;
-        }
-
-        .btn-no {
-            background: #800000;
-            color: white;
-        }
-
-        button:active {
-            border-style: inset;
-            transform: scale(0.95);
-        }
-
-        /* Стиль для экрана с криком */
         #scare-screen {
             display: none;
             position: fixed;
@@ -93,23 +78,33 @@
     <div id="scare-screen">SIX SEVEN!</div>
 
     <audio id="screamSound" src="SixSeven.m4a"></audio>
+    <audio id="loopSound" src="loyal_oldman.m4a" loop></audio>
 
     <script>
         function answer(isOld) {
-            const audio = document.getElementById('screamSound');
+            const scream = document.getElementById('screamSound');
+            const loop = document.getElementById('loopSound');
             const scareScreen = document.getElementById('scare-screen');
             const mainUI = document.getElementById('main-ui');
 
             if (isOld) {
-                alert("Добро пожаловать, почтенный олд!");
-                window.location.href = "https://t.me/your_bot_link"; // Ссылка на твоего бота
+                // ПРАНК ДЛЯ ОЛДОВ (БЕСКОНЕЧНЫЙ ЗВУК)
+                alert("ОУ, ПОЧТЕННЫЙ ВОЗРАСТ!");
+                
+                mainUI.innerHTML = "<h1 style='color: #ff00ff;'>ТЕПЕРЬ ТЫ СЛУШАЕШЬ ЭТО ВЕЧНО</h1><p style='font-size: 1.5rem;'>Не закрывай вкладку, старик...</p>";
+                
+                loop.volume = 1.0;
+                loop.play().catch(e => console.log("Ошибка: нужно взаимодействие"));
+                
             } else {
+                // СКРИМЕР SIX SEVEN
                 mainUI.style.display = 'none';
                 scareScreen.style.display = 'flex';
                 
-                audio.volume = 1.0; 
-                audio.play().catch(e => console.log("Ошибка звука: браузер требует клика"));
+                scream.volume = 1.0;
+                scream.play().catch(e => console.log("Ошибка: нужно взаимодействие"));
 
+                // Мигание
                 let colors = ['#000', '#f00', '#fff'];
                 let i = 0;
                 setInterval(() => {
@@ -117,9 +112,10 @@
                     i++;
                 }, 50);
 
+                // Редирект в гугл через 2.5 сек
                 setTimeout(() => {
                     window.location.href = "https://www.google.com/search?q=как+дожить+до+67+лет";
-                }, 18000);
+                }, 2500);
             }
         }
     </script>

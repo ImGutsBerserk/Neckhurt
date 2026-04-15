@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ВНИМАНИЕ! ПРОВЕРКА!</title>
+    <style>
+        /* CSS прямо здесь */
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: "Comic Sans MS", "Chalkboard SE", cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            border: 5px double #f00;
+            padding: 30px;
+            background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0 0 20px #f00;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff0;
+            text-shadow: 3px 3px #f00;
+            margin-bottom: 50px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: 4px outset #ccc;
+            transition: transform 0.1s;
+        }
+
+        .btn-yes {
+            background: #008000;
+            color: white;
+        }
+
+        .btn-no {
+            background: #800000;
+            color: white;
+        }
+
+        button:active {
+            border-style: inset;
+            transform: scale(0.95);
+        }
+
+        /* Стиль для экрана с криком */
+        #scare-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 9999;
+            color: red;
+            font-size: 15vw;
+            font-weight: bold;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 10px 10px 50px #f00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-ui">
+        <h1>ВАМ УЖЕ ИСПОЛНИЛОСЬ <br> 67 ЛЕТ?</h1>
+        <div class="buttons">
+            <button class="btn-yes" onclick="answer(true)">ДА</button>
+            <button class="btn-no" onclick="answer(false)">НЕТ</button>
+        </div>
+        <p style="margin-top: 30px; color: #555;">* Вход только для ветеранов мемов</p>
+    </div>
+
+    <div id="scare-screen">SIX SEVEN!</div>
+
+    <audio id="screamSound" src="SixSeven.m4a"></audio>
+
+    <script>
+        // JS прямо здесь
+        function answer(isOld) {
+            const audio = document.getElementById('screamSound');
+            const scareScreen = document.getElementById('scare-screen');
+            const mainUI = document.getElementById('main-ui');
+
+            if (isOld) {
+                // Если дед — пропускаем
+                alert("Добро пожаловать, почтенный олд!");
+                window.location.href = "https://t.me/your_bot_link"; // Ссылка на твоего бота
+            } else {
+                // Если нет — SIX SEVEN!
+                mainUI.style.display = 'none';
+                scareScreen.style.display = 'flex';
+                
+                // Включаем звук
+                audio.volume = 1.0; 
+                audio.play().catch(e => console.log("Ошибка звука: браузер требует клика"));
+
+                // Мигание экрана для эпичности
+                let colors = ['#000', '#f00', '#fff'];
+                let i = 0;
+                setInterval(() => {
+                    document.body.style.backgroundColor = colors[i % colors.length];
+                    i++;
+                }, 50);
+
+                // Через 2.5 секунды выкидываем в Google
+                setTimeout(() => {
+                    window.location.href = "https://www.google.com/search?q=как+дожить+до+67+лет";
+                }, 2500);
+            }
+        }
+    </script>
+</body>
+</html>
